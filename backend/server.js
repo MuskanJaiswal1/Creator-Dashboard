@@ -13,8 +13,14 @@ app.use(cors({
 app.use(express.json());
 app.use(cookieParser());
 
-const authRoutes = require('./routes/authroutes');
+const authRoutes = require('./routes/authRoutes');
 app.use('/api/auth', authRoutes);
+
+const creditRoutes = require('./routes/creditRoutes');
+app.use('/api/credits', creditRoutes);
+
+const feedRoutes = require('./routes/feedRoute');
+app.use('/api', feedRoutes);
 
 app.get('/', (req, res) => {
   res.send('Server is running...');
