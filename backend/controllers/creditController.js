@@ -43,15 +43,16 @@ const awardProfileCompletionCredits = async (req, res) => {
     if (!user) {
       return res.status(404).json({ message: 'User not found' });
     }
-
-    if (user.name && user.email && user.password) {
-      user.credits = await addCredits(userId, 50); // Add 50 credits for profile completion
-      await user.save();
-      return res.status(200).json({ message: 'Credits awarded for profile completion', credits: user.credits });
-    }
-
-    res.status(400).json({ message: 'Profile is not complete' });
-  } catch (err) {
+    
+    if (!user.isProfileComplete && user.bio && user.profilePicture && user.website &&
+      user.twitter && user.linkedin && user.github) {
+    user.credits = await addCredits(userId, 50);
+    user.isProfileComplete = true;
+    await user.save();
+    return res.status(200).json({ message: 'Credits awarded for profile completion', credits: user.credits });
+  }
+  
+} catch (err) {
     res.status(500).json({ message: err.message });
   }
 };

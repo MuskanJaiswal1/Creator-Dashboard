@@ -22,6 +22,9 @@ app.use('/api/credits', creditRoutes);
 const feedRoutes = require('./routes/feedRoute');
 app.use('/api', feedRoutes);
 
+const profileRoutes = require('./routes/profileRoutes');
+app.use('/api/profile', profileRoutes);
+
 app.get('/', (req, res) => {
   res.send('Server is running...');
 });

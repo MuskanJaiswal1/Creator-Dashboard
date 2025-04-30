@@ -5,8 +5,8 @@ const { getFeed,savePost, reportPost, getDashboardData } = require('../controlle
 const authenticateUser = require('../middleware/authMiddleware');
 
 router.get('/feed',authenticateUser, getFeed);
-router.post('/save', authenticate, savePost);
-router.post('/report', authenticate, reportPost);
-router.get('/dashboard', authenticate, getDashboardData);
+router.post('/save', authenticateUser, savePost);
+router.post('/report', authenticateUser, reportPost);
+router.get('/dashboard', authenticateUser, getDashboardData);
 
 module.exports = router;
